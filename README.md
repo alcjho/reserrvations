@@ -5,7 +5,7 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> Hotel reservation application example build with nestjs. support JWT authentication, stripe payment, graphql and rest API above a mongodb database.</p>
+  <p align="center">A <a href="http://nodejs.org" target="_blank">Node.js</a> Hotel reservation application example build with nestjs. support JWT authentication, stripe payment, graphql and rest API above a mongodb database.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
