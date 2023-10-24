@@ -5,12 +5,6 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
-  "workspaces": [
-    "apps/auth",
-    "apps/reservations",
-    "apps/payments",
-    "apps/notifications"
-  ],
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
