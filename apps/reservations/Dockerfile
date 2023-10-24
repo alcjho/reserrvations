@@ -10,9 +10,8 @@ COPY nest-cli.json nest-cli.json
 COPY apps/reservations apps/reservations
 COPY libs libs
 
-RUN npm install -g pnpm
-RUN pnpm install -r
-RUN pnpm run build reservations
+RUN npx pnpm install -r
+RUN npx pnpm run build reservations
 
 # Stage 2: Create the production image
 FROM node:alpine as production
@@ -25,7 +24,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY pnpm-lock.yaml ./
 
-RUN pnpm install --prod
+RUN npx pnpm install --prod
 
 #COPY --from=development /usr/src/app/node_modules ./node_modules
 COPY --from=development /usr/src/app/dist ./dist
