@@ -10,5 +10,5 @@ steps:
         'apps/auth/Dockerfile',
         '.'
       ]
-  - name: 'gcr.io.cloud-builders/docker'
+  - name: 'gcr.io/cloud-builders/docker'
     args: ['push',us-central1-docker.pkg.dev/reservation-test-402716/auth/production']
