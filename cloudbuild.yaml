@@ -1,0 +1,52 @@
+steps:
+  # Auth microservice build
+  - name: 'gcr.io.cloud-builders/docker'
+  - args: [
+    'build',
+    '-t',
+    'us-central1-docker.pkg.dev/reservation-test-402716/auth/production',
+    '-f',
+    'apps/auth/Dockerfile',
+    '.'
+  ]
+  - name: 'gcr.io.cloud-builders/docker'
+  - args: ['push',us-central1-docker.pkg.dev/reservation-test-402716/auth/production']
+
+  # reservations microservice build
+  - name: 'gcr.io.cloud-builders/docker'
+  - args: [
+    'build',
+    '-t',
+    'us-central1-docker.pkg.dev/reservation-test-402716/reservations/production',
+    '-f',
+    'apps/reservations/Dockerfile',
+    '.'
+  ]
+  - name: 'gcr.io.cloud-builders/docker'
+  - args: ['push',us-central1-docker.pkg.dev/reservation-test-402716/reservations/production']
+
+  # payments microservice build
+  - name: 'gcr.io.cloud-builders/docker'
+  - args: [
+    'build',
+    '-t',
+    'us-central1-docker.pkg.dev/reservation-test-402716/payments/production',
+    '-f',
+    'apps/payments/Dockerfile',
+    '.'
+  ]
+  - name: 'gcr.io.cloud-builders/docker'
+  - args: ['push',us-central1-docker.pkg.dev/reservation-test-402716/payments /production']
+  
+  # notifications microservice build
+  - name: 'gcr.io.cloud-builders/docker'
+  - args: [
+    'build',
+    '-t',
+    'us-central1-docker.pkg.dev/reservation-test-402716/notifications/production',
+    '-f',
+    'apps/notifications/Dockerfile',
+    '.'
+  ]
+  - name: 'gcr.io.cloud-builders/docker'
+  - args: ['push',us-central1-docker.pkg.dev/reservation-test-402716/notifications/production']

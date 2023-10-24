@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
-import { ModelDefinition, MongooseModule } from '@nestjs/mongoose';
+import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigService } from '@nestjs/config';
-import { ConfigModule } from '../config/config.module';
 
 @Module({
   imports: [
     MongooseModule.forRootAsync({
-      imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
-        return { uri: configService.get('MONGODB_URI') };
+        const dbname = configService.get('DBNAME');
+        const dbport = configService.get('DBPORT');
+        const dbhost = configService.get('DBHOST');
+        return { uri: `mongodb://${dbhost}:${dbport}/${dbname}` };
       },
       inject: [ConfigService],
     }),

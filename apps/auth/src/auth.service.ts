@@ -1,0 +1,30 @@
+/* eslint-disable prettier/prettier */
+import { ConfigService } from '@nestjs/config';
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { UserDocument } from '@app/common';
+import { Response } from 'express';
+
+@Injectable()
+export class AuthService {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly jwtService: JwtService
+  ) {}
+
+  async login(user: UserDocument, response: Response) {
+    const tokenPayload = {
+      userId: user._id,
+    };
+
+    const expires = new Date();
+    expires.setSeconds(expires.getSeconds() + this.configService.get('JWT_EXPIRATION'));
+    
+    const token = this.jwtService.sign(tokenPayload);
+    console.log('token',token)
+    response.cookie('Authentication', token, {
+      httpOnly: true,
+      expires
+    })
+  }
+} 

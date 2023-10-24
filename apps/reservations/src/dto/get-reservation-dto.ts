@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 import { IsDate, IsDefined, IsNotEmpty, IsNotEmptyObject, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 import { CreateChargeDto } from '@app/common';
 
-export class CreateReservationDto {
+export class GetReservationDto {
   @IsDate()
   @Type(() => Date)
   startDate: Date;
@@ -14,10 +15,6 @@ export class CreateReservationDto {
   @IsString()
   @IsNotEmpty()
   spaceId: string;
-
-  @IsString()
-  @IsNotEmpty()
-  userId: string;
 
   @IsString()
   @IsNotEmpty()
