@@ -11,8 +11,8 @@ COPY apps/auth apps/auth
 COPY libs libs
 
 RUN npm install - g pnpm
-RUN pnpm install -r
-RUN pnpm run build auth
+RUN npx pnpm install -r
+RUN npx pnpm run build auth
 
 # Stage 2: Create the production image
 FROM node:alpine as production
@@ -25,7 +25,7 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY pnpm-lock.yaml ./
 
-RUN pnpm install --prod
+RUN npx pnpm install --prod
 
 COPY --from=development /usr/src/app/dist ./dist
 
