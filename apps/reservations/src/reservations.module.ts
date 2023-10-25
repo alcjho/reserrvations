@@ -19,9 +19,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       isGlobal: true, // make the config global for service who wants it
       validationSchema: Joi.object({
         HTTP_PORT: Joi.string().required(),
-        DBPORT: Joi.string().required(),
-        DBNAME: Joi.string().required(),
-        DBHOST: Joi.string().required(),
+        MONGODB_URI: Joi.string().required(),
         PAYMENTS_HOST: Joi.string().required(),
         PAYMENTS_PORT: Joi.string().required(),
         AUTH_HOST: Joi.string().required(),

@@ -19,9 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
       validationSchema: Joi.object({
         HTTP_PORT: Joi.number().required(),
         TCP_PORT: Joi.number().required(),
-        DBPORT: Joi.number().required(),
-        DBHOST: Joi.string().required(),
-        DBNAME: Joi.string().required(),
+        MONGODB_URI: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION: Joi.string().required(),
       }),
