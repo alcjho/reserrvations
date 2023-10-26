@@ -6,7 +6,7 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { UsersModule } from './users/users.module';
 import { AuthService } from './auth.service';
-import { LoggerModule } from '@app/common';
+import { HealthModule, LoggerModule } from '@app/common';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
@@ -33,6 +33,7 @@ import { JwtModule } from '@nestjs/jwt';
       }),
       inject: [ConfigService],
     }),
+    HealthModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
