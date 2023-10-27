@@ -6,20 +6,16 @@ phases:
     - aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 326997616170.dkr.ecr.ca-central-1.amazonaws.com
   build:
     commands:
-      # build auth
-      - docker build -t auth -f apps/reservations/Dockerfile  .
+      - docker build -t auth -f ./apps/reservations/Dockerfile  .
       - docker tag auth:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/auth:latest
 
-      # build reservations
-      - docker build -t reservations -f apps/reservations/Dockerfile  .
+      - docker build -t reservations -f ./apps/reservations/Dockerfile  .
       - docker tag reservations:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/reservations:latest
 
-      # build notifications
-      - docker build -t notifications -f apps/reservations/Dockerfile  .
+      - docker build -t notifications -f ./apps/reservations/Dockerfile  .
       - docker tag notifications:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/notifications:latest
 
-      # build payments
-      - docker build -t payments -f apps/reservations/Dockerfile  .
+      - docker build -t payments -f ./apps/reservations/Dockerfile  .
       - docker tag payments:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/payments:latest
   post_build:
     commands:
