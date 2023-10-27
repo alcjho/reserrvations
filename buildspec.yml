@@ -6,7 +6,6 @@ phases:
     - aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 326997616170.dkr.ecr.ca-central-1.amazonaws.com
   build:
     commands:
-    - sudo service docker start
     - docker build -t auth -f ./apps/auth/Dockerfile  .
     - docker tag auth:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/auth:latest
     - docker build -t reservations -f ./apps/reservations/Dockerfile  .
