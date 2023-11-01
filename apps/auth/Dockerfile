@@ -4,14 +4,15 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
-COPY tsconfig.json tsconfig.json
-COPY nest-cli.json nest-cli.json
+COPY pnpm-workspace.yaml ./
+COPY tsconfig.json ./
+COPY nest-cli.json ./
 
 COPY apps/auth apps/auth
-COPY libs libs
-
-RUN npx pnpm install -r
-RUN npx pnpm run build auth
+COPY libs/common libs/common
+RUN npm install pnpm -g
+RUN pnpm install --recursive
+RUN pnpm build auth
 
 # Stage 2: Create the production image
 FROM node:alpine as production
@@ -23,9 +24,12 @@ WORKDIR /usr/src/app
 # Copy only necessary files for production
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY libs/common libs/common
 
-RUN npx pnpm install --prod
+RUN npm install pnpm -g
+RUN pnpm install --prod
 
+COPY --from=development /usr/src/app/apps/auth/node_modules ./apps/auth/node_modules
 COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/apps/auth/main"]

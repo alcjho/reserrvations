@@ -10,6 +10,11 @@ services:
     env_file: ./apps/auth/.env
     ports:
       - 3001:3001
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/apps/auth/node_modules
+
   # reservations:
   #   image: sleepr-reservations
   #   build:
