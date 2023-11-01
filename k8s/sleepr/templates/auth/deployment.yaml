@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+spec:
+  selector:
+    matchLabels:
+      app: auth
+      version: v1.0
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: auth
+        version: v1.0
+    spec:
+      containers:
+      - name: production
+        image: "us-central1-docker.pkg.dev/reservation-test-402716/auth/production"
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: connectionString
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt
+              key: jwtSecret
+        - name: JWT_EXPIRATION
+          value: '3600'
+        - name: HTTP_PORT
+          value: '3003'
+        - name: TCP_PORT
+          value: '3002'
+        ports:
+        - containerPort: 3003
