@@ -10,14 +10,14 @@ phases:
     - docker tag auth:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/auth:latest
     - docker build -t reservations -f ./apps/reservations/Dockerfile  .
     - docker tag reservations:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/reservations:latest
-    - docker build -t notifications -f ./apps/notifications/Dockerfile  .
-    - docker tag notifications:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/notifications:latest
-    - docker build -t payments -f ./apps/payments/Dockerfile  .
-    - docker tag payments:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/payments:latest
+    # - docker build -t notifications -f ./apps/notifications/Dockerfile  .
+  # - docker tag notifications:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/notifications:latest
+  # - docker build -t payments -f ./apps/payments/Dockerfile  .
+  # - docker tag payments:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/payments:latest
   post_build:
     commands:
     # push images to AWS ECR
     - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/auth:latest
     - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/reservations:latest
-    - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/notifications:latest
-    - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/payments:latest
+    # - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/notifications:latest
+# - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/payments:latest

@@ -24,12 +24,12 @@ WORKDIR /usr/src/app
 # Copy only necessary files for production
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
 COPY libs/common libs/common
 
 RUN npm install pnpm -g
-RUN pnpm install --prod
+RUN pnpm install -r --prod
 
-COPY --from=development /usr/src/app/apps/reservations/node_modules ./apps/reservations/node_modules
 COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/apps/reservations/main"]
