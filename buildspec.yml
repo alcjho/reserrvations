@@ -6,8 +6,10 @@ phases:
     - aws ecr get-login-password --region ca-central-1 | docker login --username AWS --password-stdin 326997616170.dkr.ecr.ca-central-1.amazonaws.com
   build:
     commands:
-    - docker build -t auth -f ./apps/auth/Dockerfile  .
-    - docker tag auth:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/auth:latest
+    - echo "Setting Docker version"
+    - docker --version
+    # - docker build -t auth -f ./apps/auth/Dockerfile  .
+    # - docker tag auth:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/auth:latest
     - docker build -t reservations -f ./apps/reservations/Dockerfile  .
     - docker tag reservations:latest 326997616170.dkr.ecr.ca-central-1.amazonaws.com/reservations:latest
     # - docker build -t notifications -f ./apps/notifications/Dockerfile  .
@@ -17,7 +19,7 @@ phases:
   post_build:
     commands:
     # push images to AWS ECR
-    - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/auth:latest
+    # - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/auth:latest
     - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/reservations:latest
     # - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/notifications:latest
 # - docker push 326997616170.dkr.ecr.ca-central-1.amazonaws.com/payments:latest
