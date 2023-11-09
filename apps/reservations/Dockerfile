@@ -4,14 +4,15 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
-COPY tsconfig.json tsconfig.json
-COPY nest-cli.json nest-cli.json
+COPY pnpm-workspace.yaml ./
+COPY tsconfig.json ./
+COPY nest-cli.json ./
 
 COPY apps/reservations apps/reservations
-COPY libs libs
-
-RUN npx pnpm install -r
-RUN npx pnpm run build reservations
+COPY libs/common libs/common
+RUN npm install pnpm -g
+RUN pnpm install --recursive
+RUN pnpm build reservations
 
 # Stage 2: Create the production image
 FROM node:alpine as production
@@ -23,10 +24,12 @@ WORKDIR /usr/src/app
 # Copy only necessary files for production
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY libs/common libs/common
 
-RUN npx pnpm install --prod
+RUN npm install pnpm -g
+RUN pnpm install --prod
 
-#COPY --from=development /usr/src/app/node_modules ./node_modules
+COPY --from=development /usr/src/app/apps/reservations/node_modules ./apps/reservations/node_modules
 COPY --from=development /usr/src/app/dist ./dist
 
 CMD ["node", "dist/apps/reservations/main"]
